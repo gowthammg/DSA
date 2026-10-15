@@ -1,0 +1,21 @@
+Given an array of integers, count the number of even and odd numbers.
+Input : arr = [1, 2, 3, 4, 5, 6, 8]
+Output: [4,3]
+	
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{1,2,3,4,5,6,7,8,9};
+      int even = 0;
+      int odd  = 0;
+      for (int i = 0; i<arr.length; i++){
+          if (arr[i]%2 == 0){
+            even++;
+          }
+          else{
+            odd++;
+          }
+      }
+      System.out.println(even+" "+odd);
+    }
+}
