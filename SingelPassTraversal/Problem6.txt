@@ -1,0 +1,22 @@
+Given an array of integers, find the first repeating element. The first repeating element is the element whose first occurrence has the smallest index among all elements that appear more than once. If no element repeats, return -1.
+Input: arr = [10, 5, 3, 4, 3, 5, 6]
+Output: 5
+	import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{10,5,3,4,3,7,6};
+      int ret = arr.length;
+      Map<Integer, Integer> mem = new HashMap<>();
+      for (int i = 0; i<arr.length; i++){
+        if (mem.get(arr[i]) == null){
+          mem.put(arr[i], i);
+        }
+        else{
+          if (ret > mem.get(arr[i])){
+            ret = mem.get(arr[i]);
+          }
+        }
+      }
+      System.out.println(ret);
+    }
+}

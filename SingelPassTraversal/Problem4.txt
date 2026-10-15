@@ -1,0 +1,28 @@
+Given an array of integers, find the maximum value of arr[j] - arr[i], where j > i. The second element must appear after the first element in the array.
+Input: arr = [2, 3, 10, 6, 4, 8, 1]
+Output: 8
+	import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{5,6,7,8,1,2,3,4,8,9};
+      int min = 0, max = 1;
+      if (arr[0] > arr[1]){
+        max = 0;
+        min = 1;
+      }
+      int diff = max-min;
+      for (int i = 2; i<arr.length; i++){
+          if (arr[min] > arr[i]){
+            min = i;
+          }
+          else if (arr[max] < arr[i]){
+            max = i;
+          }
+          if (diff < (arr[max]-arr[min]) && min < max){
+            diff = arr[max]-arr[min];
+          }
+          System.out.println(min+" "+max);
+      }
+      System.out.println(diff);
+    }
+}

@@ -1,0 +1,37 @@
+Given an array of integers, find the element that appears more than n // 2 times, where n is the length of the array. If no such element exists, return -1.
+Input: arr = [2, 2, 1, 1, 2, 2, 2]
+Output: 2
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{1,1,1,1,2,2,2,2,2};
+      int currelem = arr[0];
+      int currcount = 1;
+      for (int i =1 ; i<arr.length; i++){
+        if (currelem == arr[i]){
+          currcount++;
+        }
+        else if (currcount != 0){
+          currcount--;
+        }
+        else{
+          currelem = arr[i];
+          currcount = 1;
+        }
+      }
+     
+
+
+      // validate if currelement occurs more than n//2 times
+      int count = 0;
+      for (int i =1 ; i<arr.length; i++){
+        if (currelem == arr[i]){
+          count++;
+        }
+      }
+      int output = (count > (arr.length/2))? currelem : -1;
+      System.out.println(output);
+    }
+}
