@@ -1,0 +1,23 @@
+Given an array height where each element represents the height of a vertical line, find two lines that, together with the x-axis, can contain the maximum amount of water.
+Input: height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+Output: 49
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+     int max = 0;
+     int[] arr = new int[]{1,8,6,2,5,4,8,3,7};
+     int left = 0, right = arr.length-1;
+     while (left < right){
+      max = Integer.max(max, (right-left)*Integer.min(arr[left], arr[right]));
+      if (arr[left] < arr[right]){
+        left++;
+      }
+      else{
+        right--;
+      }
+     }
+     System.out.println(max);
+     }
+}

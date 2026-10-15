@@ -1,0 +1,27 @@
+Given a sorted array of integers and a target value, find two distinct elements whose sum equals the target.
+Input: arr = [2, 7, 11, 15], target=9
+Output: [1, 2]
+	import java.util.*;s
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{2,7,11,15};
+      int left = 0, right = arr.length-1;
+      int[] output = new int[]{-1,-1};
+      int target = 24;
+      while (left < right){
+        if (arr[left]+arr[right] == target){
+          output[0] = arr[left];
+          output[1] = arr[right];
+          break;
+        }
+        else if (arr[left]+arr[right] < target){
+          left++;
+        }
+        else{
+          right--;
+        }
+      }
+      for (int i = 0; i<output.length; i++)
+        System.out.print(output[i]+" ");
+  }
+}

@@ -1,0 +1,25 @@
+Given a sorted integer array, remove duplicates in place so that each distinct element appears at most twice.
+Input: arr = [1, 1, 1, 2, 2, 3]
+Output: [1, 1, 2, 2, 3, ...]	
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{1,2,3,4,4,4,4,5};
+      int k = 5;
+      int slow = 1, fast = 1;
+      while (fast < arr.length){
+        if (arr[fast] == arr[fast-1]){
+          fast++;
+        }
+        else{
+          arr[slow] = arr[fast];
+          slow++;
+          fast++;
+        }
+      }
+      for (int i =0 ;i<arr.length; i++)
+        System.out.print(arr[i]+" ");
+    }
+}

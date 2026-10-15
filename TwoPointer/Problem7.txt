@@ -1,0 +1,41 @@
+Given a sorted array of integers, return a new array containing the squares of every number, also sorted in ascending order.
+Input: arr = [-7, -3, 2, 3, 11]
+Output: [4, 9, 9, 49, 121]
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{-4,-3,-2,-1,5,6,7,8,9};
+      int[] output = new int[arr.length];
+      int pos = 0;
+      for (int i =0; i<arr.length; i++){
+        if (arr[i] > 0){
+          pos = i;
+          break;
+        }
+      }
+      int counter = 0;
+      int neg = pos-1;
+      while (pos < arr.length && neg >=0){
+        if (Math.abs(arr[neg]) < arr[pos]){
+          output[counter++] = arr[neg]*arr[neg];
+          neg--;
+        }
+        else{
+          output[counter++] = arr[pos]*arr[pos];
+          pos++;
+        }
+      }
+      while (pos < arr.length){
+          output[counter++] = arr[pos]*arr[pos];
+          pos++;
+      }
+      while (neg >=0){
+          output[counter++] = arr[neg]*arr[neg];
+          neg--;
+      }
+      for (int i = 0; i<output.length; i++)
+        System.out.print(output[i]+" ");
+    }
+}
