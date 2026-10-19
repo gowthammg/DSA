@@ -1,0 +1,32 @@
+Given an array of integers, find the minimum window where the continuous subarray sum is greater than or equal to K.
+
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{2,2,2,2,0,0,0,10,9,8};
+      int currsum = 0;
+      int start = -1;
+      int end = -1;
+      int k = 8;
+      int maxlen = arr.length;
+      int i = 0, j = 0;
+      while (j < arr.length){
+        currsum += arr[j];
+        j++;
+        while (currsum >= k && i < j){
+          if (currsum >= k && maxlen >= j-i){
+            maxlen = j-i;
+            start = i;
+            end = j;
+          }
+          currsum -= arr[i];
+          i++;
+        }
+        System.out.println(i+" "+j+" "+maxlen+" "+currsum);
+      }
+      System.out.println(maxlen+" "+start+" "+end);
+    }
+}
+
+
