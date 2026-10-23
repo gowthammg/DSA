@@ -1,0 +1,24 @@
+   5. First negative number in every window of size k.
+	import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{-1,-2,3,4,5,-6,-7};
+      int k = 3;
+      int[] output = new int[arr.length-k+1];
+      Queue<Integer> q = new LinkedList<>();
+      for (int i = 0; i<arr.length; i++){
+        if (arr[i] < 0)
+            q.add(arr[i]);
+        if (i+1 > k){
+          if (!q.isEmpty() && q.peek() == arr[i-k]){
+            q.remove();
+          }
+        }
+        if (i+1 >= k){
+          output[i-k+1] = (q.isEmpty())? 0 : q.peek();;
+        }
+      }
+      for (int i = 0;i<output.length; i++)
+        System.out.print(output[i]+" ");
+    }
+}
