@@ -1,0 +1,38 @@
+7. Given a string and an integer k, find the longest contiguous substring containing exactly k distinct characters. Return an empty string if no such substring exists.
+Input: s = "aabacbebebe", k = 3
+Output: "cbebebe"
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+      String input = "aabacbebebe";
+      int k = 3;
+      int i = 0; int j = 0;
+      int start = -1, end = -1;
+      int max = 0;
+      Map<Character, Integer> map = new HashMap<>();
+      while (j < input.length()){
+        char curr = input.charAt(j);
+        map.put(curr, map.getOrDefault(curr, 0)+1);
+        j++;
+        while (map.keySet().size() > k){
+          char ichar = input.charAt(i);
+          if (map.get(ichar) == 1){
+            map.remove(ichar);
+          }
+          else{
+            map.put(ichar, map.get(ichar)-1);
+          }
+          i++;
+        }
+        if (map.keySet().size() == k && max < (j-i)){
+          max = j-i;
+          start = i;
+          end = j;
+        }
+        //System.out.println(map +" "+max);
+      }
+      System.out.println(input.substring(start, end));
+    }
+}

@@ -1,0 +1,28 @@
+Given the array of positive Integer find the smallest contiguous subarray whose sum is exactly equal to k 
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{1,1,1,1,2,2,0,4};
+      int currsum = 0;
+      int start = -1;
+      int end = -1;
+      int k = 4;
+      int maxlen = arr.length;
+      int i = 0, j = 0;
+      while (j < arr.length){
+        currsum += arr[j];
+        j++;
+        while (currsum > k && i < j){
+          currsum -= arr[i];
+          i++;
+        }
+        if (currsum == k && maxlen >= j-i){
+          maxlen = j-i;
+          start = i;
+          end = j;
+        }
+        System.out.println(i+" "+j+" "+maxlen+" "+currsum);
+      }
+      System.out.println(maxlen+" "+start+" "+end);
+    }
+}
