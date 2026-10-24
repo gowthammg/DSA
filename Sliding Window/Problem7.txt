@@ -1,0 +1,50 @@
+
+7. Given strings s1 and s2, determine whether s2 contains a substring that is a permutation of s1
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: True
+	import java.util.*;
+
+
+public class Main {
+    public static boolean checkAnagram(Map<Character, Integer> org, Map<Character, Integer> pat){
+      if (org.keySet().size() != pat.keySet().size())
+        return false;
+      for (Character c : pat.keySet()){
+        if (org.get(c) == null || !org.get(c).equals(pat.get(c))){
+          return false;
+        }
+      }
+      return true;
+    }
+    public static void main(String[] args) {
+      String str = "eidbaoo";
+      String pattern = "ab";
+      boolean res = false;
+      int k = pattern.length();
+      Map<Character, Integer> pat = new HashMap<>();
+      for (int i = 0; i<pattern.length(); i++){
+          pat.put(pattern.charAt(i), pat.getOrDefault(pattern.charAt(i), 0)+1);
+      }
+      Map<Character, Integer> org = new HashMap<>();
+      for (int i = 0; i<str.length(); i++){
+        org.put(str.charAt(i), org.getOrDefault(str.charAt(i), 0)+1);
+        if (i >= k){
+          char rem = str.charAt(i-k);
+          if (org.get(rem) == 1){
+            org.remove(rem);
+          }
+          else{
+            org.put(rem, org.getOrDefault(rem, 0)-1);
+          }
+        }
+        if (i+1 >= k){
+          if (checkAnagram(org, pat)){
+            res = true;
+            break;
+          }
+        }
+        //System.out.println(org+" "+pat);
+      }
+      System.out.println(res);
+    }
+}

@@ -1,0 +1,48 @@
+6. Given two strings text and pattern, count how many substrings of text are anagrams of pattern. An anagram contains exactly the same characters with the same frequencies, although the order may differ. Eg: for, fro, ofr are considered anagram
+Input: text = "forxxorfxdofr", pattern = "for"
+Output: 3
+import java.util.*;
+
+
+public class Main {
+    public static boolean checkAnagram(Map<Character, Integer> org, Map<Character, Integer> pat){
+      if (org.keySet().size() != pat.keySet().size())
+        return false;
+      for (Character c : pat.keySet()){
+        if (org.get(c) == null || !org.get(c).equals(pat.get(c))){
+          return false;
+        }
+      }
+      return true;
+    }
+    public static void main(String[] args) {
+      String str = "forxxorfxdofrofr";
+      String pattern = "for";
+      int count = 0;
+      int k = pattern.length();
+      Map<Character, Integer> pat = new HashMap<>();
+      for (int i = 0; i<pattern.length(); i++){
+          pat.put(pattern.charAt(i), pat.getOrDefault(pattern.charAt(i), 0)+1);
+      }
+      Map<Character, Integer> org = new HashMap<>();
+      for (int i = 0; i<str.length(); i++){
+        org.put(str.charAt(i), org.getOrDefault(str.charAt(i), 0)+1);
+        if (i >= k){
+          char rem = str.charAt(i-k);
+          if (org.get(rem) == 1){
+            org.remove(rem);
+          }
+          else{
+            org.put(rem, org.getOrDefault(rem, 0)-1);
+          }
+        }
+        if (i+1 >= k){
+          if (checkAnagram(org, pat)){
+            count++;
+          }
+        }
+        //System.out.println(org+" "+pat);
+      }
+      System.out.println(count);
+    }
+}
