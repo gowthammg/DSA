@@ -1,0 +1,46 @@
+//Approach 1
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      String str1 = "listen";
+      String str2 = "silent";
+      char[] arr1 = str1.toCharArray();
+      char[] arr2 = str2.toCharArray();
+      Arrays.sort(arr1);
+      Arrays.sort(arr2);
+      boolean result = true;
+      for (int i = 0; i<arr1.length; i++){
+        if (arr1[i] != arr2[i])
+          result &= false;
+      }
+      System.out.println(result);
+    }
+}
+
+//Approach 2
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      String str1 = "listen";
+      String str2 = "dreete";
+      Map<Character, Integer> map = new HashMap<>();
+      for (int i = 0; i<str1.length(); i++){
+        map.put(str1.charAt(i), map.getOrDefault(str1.charAt(i), 0)+1);
+      }
+      boolean res = true;
+      for (int i = 0; i<str2.length(); i++){
+        if (map.get(str2.charAt(i)) == null){
+          res = false;
+          break;
+        }
+        else{
+          map.put(str2.charAt(i), map.get(str2.charAt(i))-1);
+          if (map.get(str2.charAt(i)) == 0)
+            map.remove(str2.charAt(i));
+        }
+      }
+      res = (res == true && map.size() == 0)? true : false;
+      System.out.println(res);
+    }
+}
