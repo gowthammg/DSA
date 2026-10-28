@@ -1,0 +1,47 @@
+ Given two strings, s and t, find the shortest substring of s containing every character of t, including the required number of occurrences of each character. Return an empty string if no such substring exists.
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+      String input = "ADOBECODEBANC";
+      String pattern = "ABC";
+      int i = 0; int j = 0;
+      Map<Character, Integer> patmap = new HashMap<>();
+      Map<Character, Integer> currmap = new HashMap<>();
+      for (int k = 0; k<pattern.length(); k++)
+        patmap.put(pattern.charAt(k), patmap.getOrDefault(pattern.charAt(k), 0)+1);
+      int valid = 0;
+      int min = input.length()+1;
+      int start = -1;
+      int end  = -1;
+      while (j < input.length()){
+          char curr = input.charAt(j);
+          currmap.put(curr, currmap.getOrDefault(curr, 0)+1);
+          j++;
+          if (patmap.get(curr) == currmap.get(curr)){
+            valid++;
+          }
+          while (valid == patmap.keySet().size()){
+            char ichar = input.charAt(i);
+            if (valid == patmap.keySet().size() && min > (j-i)){
+              min = j-i;
+              start = i;
+              end = j;
+            }
+            if (patmap.get(ichar) != null && patmap.get(ichar) == currmap.get(ichar)){
+              valid--;
+            }
+            currmap.put(ichar, currmap.get(ichar)-1);
+            i++;
+          }
+          //System.out.println(i+" "+j+" "+min+" "+valid);
+      }
+      System.out.println(input.substring(start, end));
+    }
+}
+
+
+

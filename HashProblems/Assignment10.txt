@@ -1,0 +1,31 @@
+Return the total number of contiguous subarrays containing exactly k distinct integers.
+Input: arr = [1, 2, 1, 2, 3], k = 2
+Output:7
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int i =0; int j = 0;
+        int k = 2;
+        int[] arr = new int[]{1,2,1,2,3,4,4,4};
+        int count = 0;
+        while (j < arr.length){
+          map.put(arr[j], map.getOrDefault(arr[j], 0)+1);
+          j++;
+          while (map.size() > k){
+            map.put(arr[i], map.get(arr[i])-1);
+            if (map.get(arr[i]) == 0){
+              map.remove(arr[i]);
+            }
+            i++;
+          }
+          //System.out.println(i+" "+j+" "+map);
+          if (map.size() == k){
+            count+=(j-i-1);
+          }
+        }
+        System.out.println(count);
+    }
+}
