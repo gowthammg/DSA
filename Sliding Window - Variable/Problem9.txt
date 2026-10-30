@@ -1,0 +1,26 @@
+Given a string containing uppercase English letters and an integer k, find the length of the longest substring that can be converted into a string containing the same character throughout by replacing at most k characters.
+
+
+class Solution {
+    public int longestSubstr(String s, int k) {
+        // code here
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        int i = 0; int j = 0;
+        int maxcharlen = 0;
+        while (j < s.length()){
+            map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0)+1);
+            maxcharlen = Integer.max(maxcharlen, map.get(s.charAt(j)));
+            j++;
+            while (j-i-maxcharlen > k){
+                // if (maxcharlen == map.get(s.charAt(i)))
+                //     maxcharlen--;
+                map.put(s.charAt(i), map.get(s.charAt(i))-1);
+                i++;
+            }
+            //System.out.println(map+" "+maxcharlen+" "+i+" "+j);
+            max = Integer.max(max, j-i);
+        }
+        return max;
+    }
+}
