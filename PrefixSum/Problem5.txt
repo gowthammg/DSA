@@ -1,0 +1,19 @@
+5. A person starts at altitude 0. Given an array representing the change in altitude at each point, find the highest altitude reached.
+Input: arr = [-5, 1, 5, 0, -7]
+Output: 1
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{5,1,5,0,-7};
+      int max = 0;
+      for (int i = 1; i<arr.length; i++){
+        arr[i] += arr[i-1];
+        if (arr[i] > max){
+          max = arr[i];
+        }
+      }
+      System.out.println(max);
+    }
+}
