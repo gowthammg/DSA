@@ -1,0 +1,25 @@
+7. Query Sum 
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+      // TC - O(m+n) SC - O(n)
+      // m - length of arr n - length of query
+      int[] arr = new int[]{2,4,1,3,5};
+      int[][] queries = {{1,4}, {0,2}, {2,4}};
+      int[] res = new int[queries.length];
+      for (int i = 1; i < arr.length; i++){
+        arr[i] = arr[i-1]+arr[i];
+      }
+      for (int i = 0; i<queries.length; i++){
+        if (queries[i][0] == 0){
+          res[i] = arr[queries[i][1]];
+        }
+        else{
+          res[i] = arr[queries[i][1]] - arr[queries[i][0]-1];
+        }
+        System.out.print(res[i]+" ");
+      }
+    }
+}
