@@ -1,0 +1,37 @@
+6. Given an array of integers, return an array where each element is the product of all elements except the element at that index. Do not use division.
+Input: arr = [1, 2, 3, 4]
+Output: [24, 12, 8, 6]
+
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{1,2,3,4};
+      int[] ret = new int[arr.length];
+      int[] prep =new int[arr.length];
+      int[] posp = new int[arr.length];
+      prep[0] = arr[0];
+      for (int i =1; i<arr.length; i++){
+        prep[i] = prep[i-1] * arr[i];
+        //System.out.println(prep[i]+" ");
+      }
+      posp[posp.length-1] = arr[posp.length-1];
+      for (int i=posp.length-2; i>=0; i--){
+        posp[i] = posp[i+1] * arr[i];
+        //System.out.println(posp[i]+" ");
+      }
+      for (int i = 0; i<ret.length; i++){
+        if (i == 0){
+          ret[i] = posp[i+1];
+        }
+        else if (i == ret.length-1){
+          ret[i] = prep[i-1];
+        }
+        else{
+          ret[i] = prep[i-1]*posp[i+1];
+        }
+        System.out.println(ret[i]+" ");
+      }
+    }
+}
