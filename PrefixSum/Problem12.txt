@@ -1,0 +1,20 @@
+12. Given an array of integers and an integer k, count the number of contiguous subarrays whose sum is divisible by k.
+Input: arr = [4, 5, 0, -2, -3, 1], k = 5
+Output: 7
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+        Map<Integer, Integer> countmap = new HashMap<>();
+        int count = 0;
+        int prefixsum = 0;
+        countmap.put(0, 1);
+        for (int i = 0; i<nums.length; i++){
+            prefixsum += nums[i];
+            prefixsum = ((prefixsum%k)+k)%k;
+            if (countmap.get(prefixsum) != null){
+                count+=countmap.get(prefixsum);
+            }
+            countmap.put(prefixsum, countmap.getOrDefault(prefixsum, 0)+1);
+        }
+        return count;
+    }
+}
