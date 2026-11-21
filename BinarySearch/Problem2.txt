@@ -1,0 +1,27 @@
+//2. Find the first left index occurrence of the array 
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      int[] arr = new int[]{1,2,2,2,2,5,7,7};
+      int target = 0;
+      int start = 0;
+      int end = arr.length-1;
+      while (start < end){
+        int mid = start+(end-start)/2;
+        //System.out.println(start+" "+end+" "+mid);
+        if (arr[mid] < target){
+          start = mid+1;          
+        }
+        else{
+          end = mid;
+        }
+      }
+      int res = -1;
+      if (arr[start] == target){
+        res = start;
+      }
+      System.out.println(res);
+    }
+}
