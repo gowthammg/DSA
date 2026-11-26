@@ -1,0 +1,29 @@
+5. Given a non-negative integer n, find and return the largest integer x such that x * x <= n. Do not use built-in square-root functions. Input: n = 16, Output: 4
+import java.util.*;
+import java.math.*;
+public class Main {
+    public static void main(String[] args) {
+      int n = 25;
+      float right = n;
+      float left = 0.1f;
+      float ret = 0;
+      while (left < right){
+        float mid = left +(right-left)/2;
+        //System.out.println(left+" "+right+" "+mid);
+        float curr = mid*mid;
+        if (right-left < 0.00001f || curr == (float) n){
+          ret = mid;
+          break;
+        }
+        if (curr <= n){
+          left = mid;
+        }
+        else{
+          right = mid;
+        }
+      }
+      System.out.println(ret);
+    }
+}
+
+
