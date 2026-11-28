@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class Main {
+    public static boolean ispossible(int[] arr, int curr, int k){
+      int count = 1;
+      int currsum = 0;
+      for (int i = 0; i<arr.length; i++){
+        currsum += arr[i];
+        if (currsum > curr){
+          currsum = arr[i];
+          count++;
+        }
+      }
+      return (count <= k)? true : false;
+    }
+    public static void main(String[] args) {
+      int[] arr = new int[]{22, 23, 67};
+      int k = 1;
+      int ret = -1;
+      if (arr.length > k){
+        int max = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i<arr.length; i++){
+          max+=arr[i];
+          if (min > arr[i])
+            min = arr[i];
+        }
+        while (min <= max){
+          int mid = (min+(max-min)/2);
+          boolean res = ispossible(arr, mid, k);
+          //System.out.println(min+" "+max+" "+mid+" "+res);
+          if (res){
+            ret = mid;
+            max = mid-1;
+          }
+          else{
+            min = mid+1;
+          }
+        }
+      }
+      System.out.println(ret);
+    }
+}
